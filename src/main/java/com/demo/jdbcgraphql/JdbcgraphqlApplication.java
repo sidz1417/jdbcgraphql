@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JdbcgraphqlApplication {
+class JdbcgraphqlApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JdbcgraphqlApplication.class, args);
-	}
+    void main(String[] args) {
+        SpringApplication.run(JdbcgraphqlApplication.class, args);
+    }
 
 }
