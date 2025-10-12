@@ -97,14 +97,15 @@ class ProductControllerTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("stockUpdateScenarios")
     void shouldUpdateStockLevels(String testCase, String mutation, int expectedStock) {
+        int productId = 1;
         String productStringBeforeUpdate = productRepository.findProductById(1)
-                .orElseThrow(() -> new RuntimeException("Product 1" + " does not exist"))
+                .orElseThrow(() -> new RuntimeException("Product " + productId + " does not exist"))
                 .toString();
 
         graphQlTester.document(mutation).execute();
 
         String productStringAfterUpdate = productRepository.findProductById(1)
-                .orElseThrow(() -> new RuntimeException("Product 1" + " does not exist"))
+                .orElseThrow(() -> new RuntimeException("Product " + productId + " does not exist"))
                 .toString();
 
         assertThat(productStringBeforeUpdate).isEqualTo("Product[id=1, name=iPhone 14 Pro, category=Electronics, stock=50, price=999]");
@@ -114,6 +115,7 @@ class ProductControllerTest {
     @Test
     void shouldAddNewProduct() {
         int totalProductsBeforeUpdate = productRepository.findAll().size();
+        int newProductId = 31;
 
         String document = """
                 mutation{
@@ -122,8 +124,8 @@ class ProductControllerTest {
                 """;
         graphQlTester.document(document).execute();
         int totalProductsAfterUpdate = productRepository.findAll().size();
-        String newProductString = productRepository.findProductById(31)
-                .orElseThrow(() -> new RuntimeException("Product 31" + " does not exist"))
+        String newProductString = productRepository.findProductById(newProductId)
+                .orElseThrow(() -> new RuntimeException("Product " + newProductId + " does not exist"))
                 .toString();
 
         assertThat(totalProductsBeforeUpdate).isEqualTo(30);
@@ -153,5 +155,5 @@ class ProductControllerTest {
                 )
         );
     }
-    
+
 }
