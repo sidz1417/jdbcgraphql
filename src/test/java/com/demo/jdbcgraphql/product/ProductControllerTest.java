@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.core.io.ClassPathResource;
@@ -25,15 +26,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProductControllerTest {
 
-    final DataSource dataSource;
-    final GraphQlTester graphQlTester;
-    final ProductRepository productRepository;
+    @Autowired
+    DataSource dataSource;
 
-    ProductControllerTest(DataSource dataSource, GraphQlTester graphQlTester, ProductRepository productRepository) {
-        this.dataSource = dataSource;
-        this.graphQlTester = graphQlTester;
-        this.productRepository = productRepository;
-    }
+    @Autowired
+    GraphQlTester graphQlTester;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @Container
     @ServiceConnection
