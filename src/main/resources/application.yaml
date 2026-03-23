@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: jdbcgraphql
+  
+  # Spring data jdbc properties
+  sql:
+    init:
+      mode: always
+  
+  # Enabling graphql playground
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+
+server:
+  port: 9191
+
+# Enable debug logging for jdbc
+logging:
+  level:
+    org.springframework.jdbc: debug
