@@ -1,12 +1,10 @@
 package com.demo.jdbcgraphql.product;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 class ProductService {
     private final ProductRepository productRepository;
 
@@ -19,22 +17,22 @@ class ProductService {
     }
 
     List<Product> getProductsByCategory(String category) {
-        return productRepository.findProductsByCategory(category);
+        return productRepository.findProductByCategory(category);
     }
 
-    void updateStock(int productid, int newStock) {
-        productRepository.findProductById(productid)
-                .orElseThrow(() -> new RuntimeException("Product " + productid + " does not exist"));
-        productRepository.updateStock(productid, newStock);
+    void updateStock(String name, int newStock) {
+        Product product = productRepository.findProductByName(name);
+        product.setStock(newStock);
+        productRepository.save(product);
     }
 
-    void receiveNewShipment(int productid, int receivedQuantity) {
-        Product product = productRepository.findProductById(productid)
-                .orElseThrow(() -> new RuntimeException("Product " + productid + " does not exist"));
-        productRepository.updateStock(productid, product.stock() + receivedQuantity);
+    void receiveNewShipment(String name, int receivedQuantity) {
+        Product product = productRepository.findProductByName(name);
+        product.setStock(product.getStock() + receivedQuantity);
+        productRepository.save(product);
     }
 
     void addNewProduct(String name, String category, int price, int stock) {
-        productRepository.save(new Product(null, name, category, stock, price));
+        productRepository.save(new Product(name, category, stock, price));
     }
 }

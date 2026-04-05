@@ -26,13 +26,13 @@ class ProductController {
     }
 
     @MutationMapping
-    void updateStock(@Argument int id, @Argument int newStock) {
-        productService.updateStock(id, newStock);
+    void updateStock(@Argument String name, @Argument int newStock) {
+        productService.updateStock(name, newStock);
     }
 
     @MutationMapping
-    void receiveNewShipment(@Argument int id, @Argument int receivedQuantity) {
-        productService.receiveNewShipment(id, receivedQuantity);
+    void receiveNewShipment(@Argument String name, @Argument int receivedQuantity) {
+        productService.receiveNewShipment(name, receivedQuantity);
     }
 
     @MutationMapping

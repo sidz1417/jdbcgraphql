@@ -12,7 +12,7 @@ type Query {
 }
 
 type Mutation {
-    updateStock(id: ID, newStock: Int): Boolean
-    receiveNewShipment(id: ID, receivedQuantity: Int): Boolean
+    updateStock(name: String, newStock: Int): Boolean
+    receiveNewShipment(name: String, receivedQuantity: Int): Boolean
     addNewProduct(name: String, category: String, price: Int, stock: Int): Boolean
 }
