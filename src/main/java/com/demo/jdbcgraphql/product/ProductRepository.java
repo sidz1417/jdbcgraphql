@@ -1,11 +1,7 @@
 package com.demo.jdbcgraphql.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
-import java.util.List;
-
-interface ProductRepository extends JpaRepository<Product, Integer> {
-    List<Product> findProductByCategory(String category);
-
-    Product findProductByName(String name);
+interface ProductRepository extends JpaRepository<Product, Integer>, QueryByExampleExecutor<Product> {
 }
