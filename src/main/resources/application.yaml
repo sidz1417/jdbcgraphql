@@ -2,6 +2,10 @@ spring:
   application:
     name: jdbcgraphql
 
+  threads:
+    virtual:
+      enabled: true
+
   
   # Enabling graphql playground
   graphql:
